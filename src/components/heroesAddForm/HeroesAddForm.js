@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
-import { heroesFetchingError, heroesAddHero } from "../../actions";
+import { heroesAddHero } from "../../actions";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { v4 as uuidv4 } from 'uuid';
@@ -16,6 +16,7 @@ import '../../styles/index.scss';
 // данных из фильтров
 
 const HeroesAddForm = () => {
+    const {filters, filtersLoadingStatus} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -25,6 +26,22 @@ const HeroesAddForm = () => {
             .catch(err => console.log(err))
     }
 
+    const renderFilters = (filters, status) => {
+        if (status === 'loading') {
+            return <option>Загрузка элементов...</option>
+        } else if (status === 'error') {
+            return <option>Ошибка загрузки</option>
+        }
+        
+        if (filters && filters.length > 0) {
+            return filters.map(({name, label}) => {
+                // eslint-disable-next-line
+                if (name === 'all') return;
+                
+                return <option key={name} value={name}>{label}</option>
+            })
+        }
+    }
     return (
         <Formik
             initialValues={{
@@ -79,10 +96,9 @@ const HeroesAddForm = () => {
                         name="element"
                         as="select">
                         <option >Я владею элементом...</option>
-                        <option value="fire">Огонь</option>
-                        <option value="water">Вода</option>
-                        <option value="wind">Ветер</option>
-                        <option value="earth">Земля</option>
+                        {
+                            renderFilters(filters, filtersLoadingStatus)
+                        }
                     </Field>
                     <ErrorMessage name="element" className="validateMessage" component="div" />
                 </div>

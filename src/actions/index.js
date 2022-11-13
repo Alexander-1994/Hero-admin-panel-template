@@ -1,3 +1,4 @@
+// ГЕРОИ:
 export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'
@@ -16,7 +17,7 @@ export const heroesFetchingError = () => {
         type: 'HEROES_FETCHING_ERROR'
     }
 }
-
+// УДАЛЕНИЕ И ДОБАВЛЕНИЕ:
 export const heroesDeleteHero = (id) => {
     return {
         type: 'HEROES_DELETE_HERO',
@@ -28,5 +29,31 @@ export const heroesAddHero = (hero) => {
     return {
         type: 'HEROES_ADD_HERO',
         payload: hero
+    }
+}
+// ФИЛЬТРЫ:
+export const filtersFetching = () => {
+    return {
+        type: 'FILTERS_FETCHING'
+    }
+}
+
+export const filtersFetched = (filters) => {
+    return {
+        type: 'FILTERS_FETCHED',
+        payload: filters
+    }
+}
+
+export const filtersFetchingError = () => {
+    return {
+        type: 'FILTERS_FETCHING_ERROR'
+    }
+}
+
+export const activeFilterChanged = (filter) => {
+    return {
+        type: 'ACTIVE_FILTER_CHANGED',
+        payload: filter
     }
 }
