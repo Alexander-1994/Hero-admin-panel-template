@@ -26,10 +26,9 @@ const HeroesList = () => {
     }, []);
 
     const onDeleteHero = (id) => {
-        dispatch(heroesFetching());
         request(`http://localhost:3001/heroes/${id}`, 'DELETE')
             .then(() => dispatch(heroesDeleteHero(id)))
-            .catch(() => dispatch(heroesFetchingError()))
+            .catch(err => console.log(err))
     }
 
     if (heroesLoadingStatus === "loading") {
