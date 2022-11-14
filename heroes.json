@@ -17,12 +17,6 @@
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
-    },
-    {
-      "id": "2b882e9a-be3e-4ce9-a70c-ca53d4af62a0",
-      "name": "Крот-копатель",
-      "description": "Рыть землю по-хлесче экскаватора",
-      "element": "earth"
     }
   ],
   "filters": [

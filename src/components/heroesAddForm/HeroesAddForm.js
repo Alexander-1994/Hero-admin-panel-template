@@ -16,7 +16,7 @@ import '../../styles/index.scss';
 // данных из фильтров
 
 const HeroesAddForm = () => {
-    const {filters, filtersLoadingStatus} = useSelector(state => state);
+    const {filters, filtersLoadingStatus} = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -95,7 +95,7 @@ const HeroesAddForm = () => {
                         id="element" 
                         name="element"
                         as="select">
-                        <option >Я владею элементом...</option>
+                        <option>Я владею элементом...</option>
                         {
                             renderFilters(filters, filtersLoadingStatus)
                         }
